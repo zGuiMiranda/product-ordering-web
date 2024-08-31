@@ -1,5 +1,4 @@
 import axios from "axios";
-import { useLocale } from "next-intl";
 
 const axiosInstance = axios.create();
 

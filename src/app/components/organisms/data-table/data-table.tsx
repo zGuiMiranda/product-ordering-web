@@ -9,6 +9,7 @@ import "ag-grid-community/styles/ag-theme-alpine.css";
 import { AgGridReact } from "ag-grid-react";
 import { useLocale } from "next-intl";
 import { useMemo } from "react";
+import './styles.css'
 
 ModuleRegistry.registerModules([ClientSideRowModelModule]);
 

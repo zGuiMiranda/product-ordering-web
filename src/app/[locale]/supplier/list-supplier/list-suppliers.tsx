@@ -1,27 +1,23 @@
 "use client";
 
-import { IconButton } from "@/app/components/molecules/button-with-icon";
-import DataTable from "@/app/components/organisms/data-table";
-import { Supplier } from "@/constants/types";
+import { DropdownMenu } from "@/app/components/molecules/dropdown-menu";
+import { DataTable } from "@/app/components/organisms/data-table-shad/data-table";
+import { MessageType, Supplier } from "@/constants/types";
 import useGetEntityHook from "@/hooks/getEntitiesHook";
+import useMutateEntityHook from "@/hooks/mutateEntityHook";
 import { deleteSupplier, getSuppliers } from "@/services/supplier";
-import { ColDef, ICellRendererParams } from "@ag-grid-community/core";
+import { ColumnDef } from "@tanstack/react-table";
 import { useLocale } from "next-intl";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import "./styles.css";
-import useMutateEntityHook from "@/hooks/mutateEntityHook";
 
 const ListSuppler = () => {
-  const { data, error, isLoading } = useGetEntityHook(
-    getSuppliers,
-    "supplier-list"
-  );
-
+  const { data } = useGetEntityHook(getSuppliers, "supplier-list");
   const locale = useLocale();
-  const { mutate, isPending, isSuccess, isError } =
-    useMutateEntityHook(deleteSupplier);
 
-  const [messages, setMessages] = useState<any>(null);
+  const { mutate } = useMutateEntityHook(deleteSupplier);
+
+  const [messages, setMessages] = useState<MessageType>(null);
 
   const deleteSupplierFn = useCallback(
     (supplierId: string) => {
@@ -40,49 +36,65 @@ const ListSuppler = () => {
     return () => {};
   }, [locale]);
 
-  const columns: ColDef[] = useMemo(
+  const columns: ColumnDef<Supplier>[] = useMemo(
     () => [
       {
-        headerName: messages && messages?.Actions?.actions,
-        filter: false,
-        width: 150,
-        cellRenderer: (cell: ICellRendererParams) => (
-          <>
-            <IconButton
-              icon="edit"
-              buttonVariant="link"
-              iconColor="orange"
-              onClick={() => deleteSupplierFn(cell.data.id)}
-            />
-            <IconButton
-              icon="trash"
-              buttonVariant="link"
-              iconColor="red"
-              onClick={() => console.log(cell.data)}
-            />
-          </>
+        accessorKey: "name",
+        header: messages && messages.Supplier.name,
+        cell: ({ row }) => (
+          <div className="capitalize">{row.getValue("name")}</div>
         ),
       },
+
       {
-        headerName: messages && messages.Supplier.name,
-        field: "name",
-        checkboxSelection: false,
-        editable: true,
-        flex: 1,
-        sortable: true,
-        unSortIcon: true,
+        id: "actions",
+        enableHiding: false,
+        cell: ({ row }) => {
+          const supplier = row.original;
+
+          return (
+            <DropdownMenu
+              menuLabel={messages && messages.Actions.actions}
+              menuItems={
+                messages
+                  ? [
+                      {
+                        label: messages.Actions.delete,
+                        onClick: () => {
+                          deleteSupplierFn(supplier.id);
+                        },
+                      },
+                      {
+                        label: messages.Actions.edit,
+                        onClick: () => console.log(row.original),
+                      },
+                    ]
+                  : []
+              }
+            />
+          );
+        },
       },
     ],
     [deleteSupplierFn, messages]
   );
 
+  const filterComponentProps = useMemo(
+    () => ({
+      placeholder: messages && messages.Supplier.filterByName,
+      filteringColumn: "name",
+    }),
+    [messages]
+  );
   return (
     <>
-      {!isLoading && (
-        <div className="table-container">
-          <DataTable columns={columns} data={(data as Supplier[]) || []} />
-        </div>
-      )}
+      <div className="table-container">
+        <DataTable
+          columns={columns}
+          filterComponentProps={filterComponentProps}
+          data={(data as Supplier[]) || []}
+        />
+      </div>
     </>
   );
 };

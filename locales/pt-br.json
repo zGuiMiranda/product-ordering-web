@@ -8,7 +8,8 @@
     "supplierName": "Nome do fornecedor",
     "registerSupplier": "Cadastrar fornecedor",
     "registerSupplierDescription": "Preencha os campos para realizar o cadastro do fornecedor",
-    "name": "Nome do fornecedor"
+    "name": "Nome do fornecedor",
+    "filterByName": "Filtre pelo nome do fornecedor..."
   },
   "NavBar": {
     "products": "Produtos",
@@ -35,5 +36,15 @@
     "edit": "Editar",
     "delete": "Excluir",
     "actions": "Ações"
+  },
+  "Table": {
+    "next": "Próximo",
+    "noResult": "Sem resultados!",
+    "noData": "Sem dados!",
+    "previous": "Anterior",
+    "columns": "Colunas",
+    "of": "de",
+    "selected": "selecionadas",
+    "rows": "linhas"
   }
 }

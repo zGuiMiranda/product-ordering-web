@@ -19,8 +19,7 @@ const CreateSupplierForm = ({
   description: string;
   inputs: ExtendedInputProps[];
 }) => {
-  const { mutate, isPending, isSuccess, isError } =
-    useMutateEntityHook(createSupplier);
+  const { mutate } = useMutateEntityHook(createSupplier);
 
   const [isMounted, setIsMounted] = useState(false);
 

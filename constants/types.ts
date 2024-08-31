@@ -17,3 +17,7 @@ export type Supplier = {
 };
 
 export type PageProps = { params: { locale: string } };
+
+export type MessageType = {
+  [key: string]: any;
+} | null;

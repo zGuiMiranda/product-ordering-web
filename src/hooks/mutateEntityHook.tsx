@@ -1,4 +1,6 @@
 import { useToast } from "@/components/ui/use-toast";
+import { MessageType } from "@/constants/types";
+import { useLoading } from "@/context/loading-context-provider";
 import {
   useMutation,
   UseMutationOptions,
@@ -13,7 +15,8 @@ const useMutateEntityHook = <TData, TResult, TError>(
 ): UseMutationResult<TResult, TError, TData> => {
   const locale = useLocale();
   const { toast } = useToast();
-  const [messages, setMessages] = useState<any>(null);
+  const [messages, setMessages] = useState<MessageType>(null);
+  const { setIsLoading } = useLoading();
 
   useEffect(() => {
     async function loadLocaleData() {
@@ -30,12 +33,17 @@ const useMutateEntityHook = <TData, TResult, TError>(
 
   return useMutation({
     mutationFn: (data: TData) => mutationFn(data, locale),
+    onMutate: () => {
+      setIsLoading(true);
+    },
     onSuccess: () => {
       toast({
         title: messages?.success || "Bem sucedido!",
         description:
           messages?.successDescription || "Ação realizada com sucesso.",
+        className: "bg-black text-white",
       });
+      setIsLoading(false);
     },
     onError: () => {
       toast({
@@ -43,7 +51,13 @@ const useMutateEntityHook = <TData, TResult, TError>(
         title: messages?.error || "Ocorreu um erro!",
         description: messages?.errorDescription || "Algo de errado aconteceu.",
       });
+      setIsLoading(false);
     },
+
+    onSettled: () => {
+      setIsLoading(false);
+    },
+
     ...options,
   });
 };
