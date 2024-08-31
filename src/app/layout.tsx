@@ -6,6 +6,7 @@ import { useMemo } from "react";
 import { NextIntlClientProvider, useTranslations } from "next-intl";
 import QueryClientContextProvider from "@/context/query-client-context-provider";
 import { Toaster } from "@/components/ui/toaster";
+import { LoadingContextProvider } from "@/context/loading-context-provider";
 export const dynamic = "force-dynamic";
 const font = Inter({
   weight: "400",
@@ -95,20 +96,20 @@ export default function RootLayout({
   return (
     <html>
       <NextIntlClientProvider>
-        <QueryClientContextProvider>
-          <body className={font.className}>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                backgroundColor: "black",
-              }}
-            >
-              <NavBar menus={GetMenus()} />
-            </div>
-            {children}
-          </body>
-        </QueryClientContextProvider>
+        <body className={font.className}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              backgroundColor: "black",
+            }}
+          >
+            <NavBar menus={GetMenus()} />
+          </div>
+          <LoadingContextProvider>
+            <QueryClientContextProvider>{children}</QueryClientContextProvider>
+          </LoadingContextProvider>
+        </body>
         <Toaster />
       </NextIntlClientProvider>
     </html>
