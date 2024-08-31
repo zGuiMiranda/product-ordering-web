@@ -1,0 +1,24 @@
+{
+  "Product": {
+    "productName": "Nome do produto",
+    "registerProduct": "Cadastrar produto",
+    "registerProductDescription": "Preencha os campos para realizar o cadastro do produto."
+  },
+  "Supplier": {
+    "supplierName": "Nome do fornecedor",
+    "registerSupplier": "Cadastrar fornecedor",
+    "registerSupplierDescription": "Preencha os campos para realizar o cadastro do fornecedor"
+  },
+  "NavBar": {
+    "products": "Produtos",
+    "createProduct": "Criar produtos",
+    "createProductDescription": "Crie produtos de forma rápida e eficiente",
+    "suppliers": "Fornecedores",
+    "createSupplier": "Criar fornecedor",
+    "createSupplierDescription": "Crie fornecedores de forma rápida e eficiente",
+    "orders": "Pedidos",
+    "createOrder": "Fazer pedido",
+    "createOrderDescription": "Realize um pedido dos nossos produtos"
+  },
+  "Actions": { "save": "Salvar" }
+}
