@@ -1,0 +1,39 @@
+{
+  "Product": {
+    "productName": "Nome do produto",
+    "registerProduct": "Cadastrar produto",
+    "registerProductDescription": "Preencha os campos para realizar o cadastro do produto."
+  },
+  "Supplier": {
+    "supplierName": "Nome do fornecedor",
+    "registerSupplier": "Cadastrar fornecedor",
+    "registerSupplierDescription": "Preencha os campos para realizar o cadastro do fornecedor",
+    "name": "Nome do fornecedor"
+  },
+  "NavBar": {
+    "products": "Produtos",
+    "createProduct": "Criar produtos",
+    "createProductDescription": "Crie produtos de forma rápida e eficiente",
+    "suppliers": "Fornecedores",
+    "createSupplier": "Criar fornecedor",
+    "createSupplierDescription": "Crie fornecedores de forma rápida e eficiente",
+    "listSupplier": "Listar fornecedor",
+    "listSupplierDescription": "Liste todos os fornecedores cadastrados",
+    "orders": "Pedidos",
+    "createOrder": "Fazer pedido",
+    "createOrderDescription": "Realize um pedido dos nossos produtos"
+  },
+  "Generic": {
+    "name": "name",
+    "error": "Opsssss! As coisas não saíram como o esperado.",
+    "errorDescription": "Ocorreu um erro ao realizar a operação!",
+    "success": "Operação bem sucedida!",
+    "successDescription": "Operação realizada com sucesso!"
+  },
+  "Actions": {
+    "save": "Salvar",
+    "edit": "Editar",
+    "delete": "Excluir",
+    "actions": "Ações"
+  }
+}
